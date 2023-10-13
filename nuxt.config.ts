@@ -3,4 +3,5 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@nuxtjs/tailwindcss", "@bg-dev/nuxt-naiveui", "@pinia/nuxt"],
   runtimeConfig: {},
+  ssr: false,
 });
