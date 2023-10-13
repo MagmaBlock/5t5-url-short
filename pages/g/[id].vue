@@ -37,7 +37,8 @@ if (id) {
     const { data } = await supabase
       .from("short_urls")
       .select()
-      .eq("short_url", id);
+      .eq("short_url", id)
+      .eq('removed', false);
 
     if (!data || data.length == 0) {
       isNotFound.value = true;

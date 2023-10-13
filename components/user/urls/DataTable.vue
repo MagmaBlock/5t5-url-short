@@ -1,0 +1,61 @@
+<template>
+  <div>
+    <NSpin :show="store.state.isLoading">
+      <NResult
+        status="404"
+        title="获取历史短链失败"
+        :description="store.state.isError"
+        v-if="store.state.isError"
+      />
+      <NDataTable :columns="columns" :data="store.urls" v-else />
+    </NSpin>
+  </div>
+</template>
+
+<script setup>
+import { useUserUrlsStore } from "~/store/userUrls.js";
+import UserUrlsTableActions from "./TableActions.vue";
+import { NSpace, NuxtLink } from "#components";
+
+const store = useUserUrlsStore();
+
+const columns = [
+  {
+    title: "短链",
+    key: "short_url",
+    render(row) {
+      return h(
+        NuxtLink,
+        { to: "/g/" + row.short_url, target: "_blank" },
+        { default: () => row.short_url }
+      );
+    },
+  },
+  {
+    title: "长链",
+    key: "long_url",
+    ellipsis: true,
+    render(row) {
+      return h(
+        NuxtLink,
+        { to: row.long_url, target: "_blank" },
+        { default: () => row.long_url }
+      );
+    },
+  },
+  {
+    title: "操作",
+    key: "actions",
+    render(row) {
+      return h(UserUrlsTableActions, { id: row.id, short_url: row.short_url });
+    },
+  },
+];
+
+onMounted(async () => {
+  store.state.isLoading = true;
+  await store.getUserID();
+  await store.fetchData();
+  store.state.isLoading = false;
+});
+</script>
