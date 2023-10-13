@@ -1,7 +1,5 @@
 <template>
   <div>
-    <HeaderTitle />
-
     <NForm>
       <NFormItemRow label="邮箱">
         <n-input placeholder="邮箱" v-model:value="email" />
@@ -16,7 +14,7 @@
       block
       secondary
       strong
-      :loading="loginLoading"
+      :loading="store.state.isLoginLoading"
     >
       登录
     </NButton>
@@ -24,34 +22,25 @@
 </template>
 
 <script setup>
-import { supabase } from "../utils/supabase.js";
+import { useAuthStore } from "~/store/auth.js";
+
+const store = useAuthStore();
 
 const message = useMessage();
 
 const email = ref(null);
 const password = ref(null);
 
-const loginLoading = ref(false);
-
 async function login() {
-  if (!email || !password) return;
-
-  loginLoading.value = true;
-
-  const loginResult = await supabase.auth.signInWithPassword({
-    email: email.value,
-    password: password.value,
-  });
+  const loginResult = await store.login(email.value, password.value);
 
   console.log("登录结果: ", loginResult);
 
-  // success
+  // display message
   if (loginResult.error == null) {
-    message.success("登录成功, 欢迎回来, " + loginResult.data.user.email);
+    message.success("登录成功, 欢迎回来, " + loginResult.data?.user?.email);
   } else {
     message.error("登录失败: " + loginResult.error.message);
   }
-
-  loginLoading.value = false;
 }
 </script>

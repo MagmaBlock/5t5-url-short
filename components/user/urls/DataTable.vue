@@ -15,7 +15,7 @@
 <script setup>
 import { useUserUrlsStore } from "~/store/userUrls.js";
 import UserUrlsTableActions from "./TableActions.vue";
-import { NSpace, NuxtLink } from "#components";
+import { NuxtLink } from "#components";
 
 const store = useUserUrlsStore();
 

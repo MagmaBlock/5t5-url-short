@@ -11,7 +11,7 @@
 import {
   HomeOutline as HomeIcon,
   ChatboxOutline as AboutIcon,
-  LogInOutline as LoginIcon,
+  PersonOutline as LoginIcon,
 } from "@vicons/ionicons5";
 import { NIcon } from "naive-ui";
 import LinkButton from "./LinkButton.vue";
@@ -30,8 +30,8 @@ const menuOptions = [
     icon: renderIcon(AboutIcon),
   },
   {
-    label: () => h(LinkButton, { to: "/login" }, () => "登录"),
-    key: "login",
+    label: () => h(LinkButton, { to: "/auth" }, () => "验证"),
+    key: "auth",
     icon: renderIcon(LoginIcon),
   },
 ];
