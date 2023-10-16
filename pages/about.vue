@@ -1,7 +1,7 @@
 <template>
   <div>
     <HeaderTitle />
-    <NP>一个简单的 URL 缩短工具</NP>
+    <NP>一个简单的 URL 缩短工具, 登录后使用。</NP>
     <NuxtLink to="/">
       <NButton tertiary>
         <template #icon>
