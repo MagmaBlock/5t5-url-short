@@ -7,7 +7,14 @@
         :description="store.state.isError"
         v-if="store.state.isError"
       />
-      <NDataTable :columns="columns" :data="store.urls" v-else />
+      <NDataTable
+        :columns="columns"
+        :data="store.urls"
+        :scroll-x="400"
+        virtual-scroll
+        max-height="50vh"
+        v-else
+      />
     </NSpin>
   </div>
 </template>

@@ -97,7 +97,7 @@ async function createNewShortUrl() {
     store.fetchData();
   }
 
-  if (result.error?.code === 401) {
+  if (result?.status === 401) {
     message.error("创建失败: 当前账户不能创建短链. 您可能未登录");
   } else if (result.error) {
     message.error("创建失败: " + result.error?.message);
