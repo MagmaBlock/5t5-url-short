@@ -28,17 +28,6 @@ const store = useUserUrlsStore();
 
 const columns = [
   {
-    title: "短链",
-    key: "short_url",
-    render(row) {
-      return h(
-        NuxtLink,
-        { to: "/g/" + row.short_url, target: "_blank" },
-        { default: () => row.short_url }
-      );
-    },
-  },
-  {
     title: "长链",
     key: "long_url",
     ellipsis: true,
@@ -51,8 +40,21 @@ const columns = [
     },
   },
   {
+    title: "短链",
+    key: "short_url",
+    width: 100,
+    render(row) {
+      return h(
+        NuxtLink,
+        { to: "/g/" + row.short_url, target: "_blank" },
+        { default: () => row.short_url }
+      );
+    },
+  },
+  {
     title: "操作",
     key: "actions",
+    width: 150,
     render(row) {
       return h(UserUrlsTableActions, { id: row.id, short_url: row.short_url });
     },
