@@ -1,13 +1,11 @@
 <template>
-  <div>
-    <NForm>
-      <NFormItemRow label="邮箱">
-        <n-input placeholder="邮箱" v-model:value="email" />
-      </NFormItemRow>
-      <NFormItemRow label="密码">
-        <n-input placeholder="密码" type="password" v-model:value="password" />
-      </NFormItemRow>
-    </NForm>
+  <NForm class="max-w-md">
+    <NFormItemRow label="邮箱" required>
+      <NInput placeholder="邮箱" v-model:value="email" />
+    </NFormItemRow>
+    <NFormItemRow label="密码" required>
+      <NInput placeholder="密码" type="password" v-model:value="password" />
+    </NFormItemRow>
     <NButton
       type="primary"
       @click="login"
@@ -18,7 +16,7 @@
     >
       登录
     </NButton>
-  </div>
+  </NForm>
 </template>
 
 <script setup>
