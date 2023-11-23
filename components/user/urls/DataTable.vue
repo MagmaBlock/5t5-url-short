@@ -11,8 +11,8 @@
         :columns="columns"
         :data="store.urls"
         :scroll-x="400"
-        virtual-scroll
-        max-height="50vh"
+        striped
+        :pagination="{ pageSize: 6, pageSlot: 6 }"
         v-else
       />
     </NSpin>

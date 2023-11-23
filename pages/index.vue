@@ -22,9 +22,23 @@
         Short it!
       </NButton>
     </div>
-
+    <NCollapseTransition :show="latestShortUrl !== null">
+      <NInputGroup class="max-w-xs">
+        <NInputGroupLabel>
+          https://5t5.top/g/{{ latestShortUrl }}</NInputGroupLabel
+        >
+        <NButton type="primary" secondary @click="handleLatestCopy">
+          <template #icon>
+            <NIcon><CopyOutline /></NIcon>
+          </template>
+          复制
+        </NButton>
+      </NInputGroup>
+    </NCollapseTransition>
+    <NDivider />
+    <NH4>自定义短链</NH4>
     <NInputGroup class="max-w-xs">
-      <NInputGroupLabel>https://5t5.top/</NInputGroupLabel>
+      <NInputGroupLabel>https://5t5.top/g/</NInputGroupLabel>
       <NInput :placeholder="customShortUrl" v-model:value="customShortUrl" />
       <NButton
         type="primary"
@@ -43,15 +57,24 @@
 </template>
 
 <script setup>
-import { ArrowForward, Refresh } from "@vicons/ionicons5";
+import { ArrowForward, Refresh, CopyOutline } from "@vicons/ionicons5";
+import { useClipboard } from "@vueuse/core";
 import cryptoRandomString from "crypto-random-string";
 import { useUserUrlsStore } from "~/store/userUrls.js";
 
 const message = useMessage();
 const store = useUserUrlsStore();
+const clipboard = useClipboard();
 
+// 界面中的表单
 const longUrl = ref(null);
 const customShortUrl = ref(null);
+// 上一次创建成功的短链接
+const latestShortUrl = ref(null);
+// 复制上一次的短链
+function handleLatestCopy() {
+  clipboard.copy("https://5t5.top/g/" + latestShortUrl.value);
+}
 
 let userID = null;
 
@@ -94,6 +117,7 @@ async function createNewShortUrl() {
   if (result.status === 201) {
     message.success("创建成功");
     customShortUrl.value = randomShortUrl();
+    latestShortUrl.value = customShortUrl.value;
     store.fetchData();
   }
 
