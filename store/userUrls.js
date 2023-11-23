@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 
 // pinia store
-export const useUserUrlsStore = defineStore('userUrls', {
+export const useUserUrlsStore = defineStore("userUrls", {
   state: () => ({
     state: {
       isLoading: true,
@@ -25,7 +25,8 @@ export const useUserUrlsStore = defineStore('userUrls', {
         .from("short_urls")
         .select("*")
         .eq("owner", this.userID)
-        .eq("removed", false);
+        .eq("removed", false)
+        .order("created_at", { ascending: false });
 
       this.urls = fetchResult?.data ?? [];
       this.state.isError = fetchResult?.error?.message ?? "";
@@ -46,6 +47,6 @@ export const useUserUrlsStore = defineStore('userUrls', {
 
       console.log(deleteResult);
       return deleteResult;
-    }
-  }
-})
+    },
+  },
+});
