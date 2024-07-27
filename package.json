@@ -10,19 +10,19 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@bg-dev/nuxt-naiveui": "^1.5.1",
+    "@bg-dev/nuxt-naiveui": "^1.14.0",
     "@nuxt/devtools": "latest",
-    "@nuxtjs/tailwindcss": "^6.8.0",
+    "@nuxtjs/tailwindcss": "^6.12.1",
     "@vicons/ionicons5": "^0.12.0",
-    "nuxt": "^3.7.4",
-    "vue": "^3.3.4",
-    "vue-router": "^4.2.5"
+    "nuxt": "^3.12.4",
+    "vue": "^3.4.34",
+    "vue-router": "^4.4.0"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.11",
-    "@supabase/supabase-js": "^2.38.0",
-    "@vueuse/core": "^10.5.0",
+    "@supabase/supabase-js": "^2.44.4",
+    "@vueuse/core": "^10.11.0",
     "crypto-random-string": "^5.0.0",
-    "pinia": "^2.1.6"
+    "pinia": "^2.2.0"
   }
 }
